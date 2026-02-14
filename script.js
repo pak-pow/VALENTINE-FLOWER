@@ -88,3 +88,5 @@ function startFloatingHearts() {
         }, duration * 1000);
     }, 400); 
 }
+
+window.onload = startValentineAnimation;
