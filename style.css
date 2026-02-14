@@ -38,3 +38,18 @@ p {
     color: #eee;
     transition: opacity 2s ease, transform 2s ease;
 }
+
+.hidden {
+    opacity: 0;
+    transform: translateY(20px); 
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.move-up {
+    transform: translateY(-100px);
+    opacity: 0;
+}
