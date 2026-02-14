@@ -15,3 +15,26 @@ body {
     justify-content: center;
     font-family: 'Poppins', sans-serif;
 }
+
+.container {
+    text-align: center;
+    z-index: 10;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 90%;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: #ff8fa3;
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #eee;
+    transition: opacity 2s ease, transform 2s ease;
+}
