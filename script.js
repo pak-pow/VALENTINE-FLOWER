@@ -2,6 +2,7 @@ window.onload = () => {
     const curtain = document.getElementById('curtain');
     const t1 = document.getElementById('t1');
     const t2 = document.getElementById('t2');
+    const valentineText = document.getElementById('valentine-text');
     const heartsContainer = document.getElementById('floating-hearts-container');
 
     // Helper function for delay
@@ -45,6 +46,9 @@ window.onload = () => {
         // START the floating hearts
         startFloatingHearts();
         
+        // Show Happy Valentines Text
+        await wait(1000);
+        valentineText.style.opacity = '1';
 
         // 10. Remove curtain from DOM so we can see clearly
         await wait(2000);

@@ -58,6 +58,24 @@ p {
 .fade-in { opacity: 1; transform: translateY(0); }
 .fade-out { opacity: 0; transform: translateY(-30px); }
 
+#valentine-text {
+    position: absolute;
+    /* Position above the flowers */
+    top: 20%; 
+    width: 100%;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    /* Small, elegant size */
+    font-size: 2.5rem; 
+    color: #ff4d6d;
+    /* Soft glow */
+    text-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+    opacity: 0; /* Hidden initially */
+    z-index: 50;
+    transition: opacity 3s ease-in;
+    pointer-events: none;
+}
+
 
 /* --- FLOATING HEARTS STYLES --- */
 #floating-hearts-container {
