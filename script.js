@@ -1,92 +1,83 @@
-const introText = document.getElementById('intro-text');
-const messageText = document.getElementById('message-text');
-const garden = document.getElementById('garden');
-const background = document.getElementById('background');
+window.onload = () => {
+    const curtain = document.getElementById('curtain');
+    const t1 = document.getElementById('t1');
+    const t2 = document.getElementById('t2');
+    const heartsContainer = document.getElementById('floating-hearts-container');
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    // Helper function for delay
+    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-async function startValentineAnimation() {
-    await sleep(1000);
+    async function runSequence() {
+        // 1. Initial Wait
+        await wait(500);
 
-    introText.classList.remove('hidden');
-    introText.classList.add('visible');
+        // 2. Show "Hi Hazel"
+        t1.classList.add('fade-in');
 
-    await sleep(3000);
+        // 3. Wait
+        await wait(2500);
 
-    introText.classList.remove('visible');
-    introText.classList.add('move-up');
+        // 4. Hide "Hi Hazel"
+        t1.classList.remove('fade-in');
+        t1.classList.add('fade-out');
 
-    await sleep(1000);
+        // 5. Short pause
+        await wait(500);
 
-    messageText.classList.remove('hidden');
-    messageText.classList.add('visible');
+        // 6. Show Message
+        t2.classList.add('fade-in');
 
-    await sleep(4000);
+        // 7. Read Message
+        await wait(4500);
 
-    messageText.style.transform = "translateY(-50px)";
-    
-    createGarden();
-    startFloatingHearts();
-}
+        // 8. Move Message Up
+        t2.classList.remove('fade-in');
+        t2.style.transform = 'translateY(-150px)';
+        t2.style.opacity = '0.8';
 
-function createGarden() {
-    const flowercount = 3;
-
-    for (let i = 0; i < flowercount; i++) {
-        const container = document.createElement('div');
-        container.classList.add('flower-container');
-
-        const stem = document.createElement('div');
-        stem.classList.add('stem');
+        // 9. THE BIG REVEAL
+        // Fade out the black curtain
+        curtain.style.opacity = '0';
         
-        const head = document.createElement('div');
-        head.classList.add('flower-head');
+        // UNPAUSE the flower animations
+        document.body.classList.remove('not-loaded');
 
-        const leftLeaf = document.createElement('div');
-        leftLeaf.classList.add('leaf', 'left');
+        // START the floating hearts
+        startFloatingHearts();
+        
 
-        const rightLeaf = document.createElement('div');
-        rightLeaf.classList.add('leaf', 'right');
-
-        stem.appendChild(leftLeaf);
-        stem.appendChild(rightLeaf);
-        stem.appendChild(head);
-        container.appendChild(stem);
-        garden.appendChild(container);
-
-        setTimeout(() => {
-            const randomHeight = Math.floor(Math.random() * 100) + 150;
-            stem.style.height = `${randomHeight}px`;
-
-            setTimeout(() => {
-                head.style.transform = 'rotate(45deg) scale(1)';
-                leftLeaf.style.opacity = '1';
-                rightLeaf.style.opacity = '1';
-            }, 2000); 
-
-        }, i * 1500);
+        // 10. Remove curtain from DOM so we can see clearly
+        await wait(2000);
+        curtain.style.display = 'none';
     }
-}
 
-function startFloatingHearts() {
-    setInterval(() => {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        
-        heart.style.left = Math.random() * 100 + "vw";
+    // Function to generate random floating hearts
+    function startFloatingHearts() {
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
 
-        const sizeScale = Math.random() * 0.5 + 0.5; 
-        heart.style.transform = `scale(${sizeScale}) rotate(45deg)`;
-        
-        const duration = Math.random() * 5 + 5; 
-        heart.style.animationDuration = `${duration}s`;
+            // Randomize size (between 10px and 25px)
+            const size = Math.random() * 15 + 10;
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
 
-        background.appendChild(heart);
+            // Randomize horizontal position
+            heart.style.left = Math.random() * 100 + 'vw';
 
-        setTimeout(() => {
-            heart.remove();
-        }, duration * 1000);
-    }, 400); 
-}
+            // Randomize animation speed (between 5s and 10s)
+            const duration = Math.random() * 5 + 5;
+            heart.style.animationDuration = `${duration}s`;
 
-window.onload = startValentineAnimation;
+            heartsContainer.appendChild(heart);
+
+            // Cleanup heart after animation finishes
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+
+        }, 400); // Create a new heart every 400ms
+    }
+
+    runSequence();
+};
