@@ -28,3 +28,42 @@ async function startValentineAnimation() {
     createGarden();
     startFloatingHearts();
 }
+
+function createGarden() {
+    const flowercount = 3;
+
+    for (let i = 0; i < flowercount; i++) {
+        const container = document.createElement('div');
+        container.classList.add('flower-container');
+
+        const stem = document.createElement('div');
+        stem.classList.add('stem');
+        
+        const head = document.createElement('div');
+        head.classList.add('flower-head');
+
+        const leftLeaf = document.createElement('div');
+        leftLeaf.classList.add('leaf', 'left');
+
+        const rightLeaf = document.createElement('div');
+        rightLeaf.classList.add('leaf', 'right');
+
+        stem.appendChild(leftLeaf);
+        stem.appendChild(rightLeaf);
+        stem.appendChild(head);
+        container.appendChild(stem);
+        garden.appendChild(container);
+
+        setTimeout(() => {
+            const randomHeight = Math.floor(Math.random() * 100) + 150;
+            stem.style.height = `${randomHeight}px`;
+
+            setTimeout(() => {
+                head.style.transform = 'rotate(45deg) scale(1)';
+                leftLeaf.style.opacity = '1';
+                rightLeaf.style.opacity = '1';
+            }, 2000); 
+
+        }, i * 1500);
+    }
+}
