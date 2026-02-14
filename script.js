@@ -67,3 +67,24 @@ function createGarden() {
         }, i * 1500);
     }
 }
+
+function startFloatingHearts() {
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        
+        heart.style.left = Math.random() * 100 + "vw";
+
+        const sizeScale = Math.random() * 0.5 + 0.5; 
+        heart.style.transform = `scale(${sizeScale}) rotate(45deg)`;
+        
+        const duration = Math.random() * 5 + 5; 
+        heart.style.animationDuration = `${duration}s`;
+
+        background.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, duration * 1000);
+    }, 400); 
+}
